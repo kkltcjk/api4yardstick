@@ -1,0 +1,410 @@
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 00:48:50 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:5000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 00:49:24 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (127.0.0.1:5000).
+bind(): Address already in use [core/socket.c line 769]
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 00:50:01 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5000 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Python main interpreter initialized at 0x2245810
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x2245810 pid: 17081 (default app)
+spawned uWSGI master process (pid: 17081)
+spawned uWSGI worker 1 (pid: 17096, cores: 1)
+spawned uWSGI worker 2 (pid: 17097, cores: 1)
+spawned uWSGI worker 3 (pid: 17098, cores: 1)
+spawned uWSGI worker 4 (pid: 17099, cores: 1)
+spawned uWSGI worker 5 (pid: 17100, cores: 1)
+spawned uWSGI worker 6 (pid: 17101, cores: 1)
+spawned uWSGI worker 7 (pid: 17102, cores: 1)
+spawned uWSGI worker 8 (pid: 17103, cores: 1)
+spawned uWSGI worker 9 (pid: 17104, cores: 1)
+spawned uWSGI worker 10 (pid: 17105, cores: 1)
+invalid request block size: 21327 (max 4096)...skip
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 00:59:28 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5000 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Python main interpreter initialized at 0x231c810
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "./app.py", line 189, in <module>
+    app.run()
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/flask/app.py", line 843, in run
+    run_simple(host, port, self, **options)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 694, in run_simple
+    inner()
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 656, in inner
+    fd=fd)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 550, in make_server
+    passthrough_errors, ssl_context, fd=fd)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 464, in __init__
+    HTTPServer.__init__(self, (host, int(port)), handler)
+  File "/usr/lib/python2.7/SocketServer.py", line 419, in __init__
+    self.server_bind()
+  File "/usr/lib/python2.7/BaseHTTPServer.py", line 108, in server_bind
+    SocketServer.TCPServer.server_bind(self)
+  File "/usr/lib/python2.7/SocketServer.py", line 430, in server_bind
+    self.socket.bind(self.server_address)
+  File "/usr/lib/python2.7/socket.py", line 224, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+spawned uWSGI master process (pid: 17451)
+spawned uWSGI worker 1 (pid: 17465, cores: 1)
+spawned uWSGI worker 2 (pid: 17466, cores: 1)
+spawned uWSGI worker 3 (pid: 17467, cores: 1)
+spawned uWSGI worker 4 (pid: 17469, cores: 1)
+spawned uWSGI worker 5 (pid: 17470, cores: 1)
+spawned uWSGI worker 6 (pid: 17472, cores: 1)
+spawned uWSGI worker 7 (pid: 17473, cores: 1)
+spawned uWSGI worker 8 (pid: 17474, cores: 1)
+spawned uWSGI worker 9 (pid: 17475, cores: 1)
+spawned uWSGI worker 10 (pid: 17476, cores: 1)
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 01:00:11 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5000 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Python main interpreter initialized at 0x2228810
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "./app.py", line 189, in <module>
+    app.run()
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/flask/app.py", line 843, in run
+    run_simple(host, port, self, **options)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 694, in run_simple
+    inner()
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 656, in inner
+    fd=fd)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 550, in make_server
+    passthrough_errors, ssl_context, fd=fd)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 464, in __init__
+    HTTPServer.__init__(self, (host, int(port)), handler)
+  File "/usr/lib/python2.7/SocketServer.py", line 419, in __init__
+    self.server_bind()
+  File "/usr/lib/python2.7/BaseHTTPServer.py", line 108, in server_bind
+    SocketServer.TCPServer.server_bind(self)
+  File "/usr/lib/python2.7/SocketServer.py", line 430, in server_bind
+    self.socket.bind(self.server_address)
+  File "/usr/lib/python2.7/socket.py", line 224, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+spawned uWSGI master process (pid: 17546)
+spawned uWSGI worker 1 (pid: 17563, cores: 1)
+spawned uWSGI worker 2 (pid: 17565, cores: 1)
+spawned uWSGI worker 3 (pid: 17566, cores: 1)
+spawned uWSGI worker 4 (pid: 17567, cores: 1)
+spawned uWSGI worker 5 (pid: 17568, cores: 1)
+spawned uWSGI worker 6 (pid: 17569, cores: 1)
+spawned uWSGI worker 7 (pid: 17570, cores: 1)
+spawned uWSGI worker 8 (pid: 17571, cores: 1)
+spawned uWSGI worker 9 (pid: 17572, cores: 1)
+spawned uWSGI worker 10 (pid: 17573, cores: 1)
+invalid request block size: 21327 (max 4096)...skip
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 01:17:45 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5000 fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Set PythonHome to /root/yardstick_venv
+Python main interpreter initialized at 0x2640810
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "./app.py", line 189, in <module>
+    app.run(debug=True, host='0.0.0.0')
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/flask/app.py", line 843, in run
+    run_simple(host, port, self, **options)
+  File "/root/yardstick_venv/local/lib/python2.7/site-packages/werkzeug/serving.py", line 677, in run_simple
+    s.bind((hostname, port))
+  File "/usr/lib/python2.7/socket.py", line 224, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+spawned uWSGI master process (pid: 18310)
+spawned uWSGI worker 1 (pid: 18326, cores: 1)
+spawned uWSGI worker 2 (pid: 18327, cores: 1)
+spawned uWSGI worker 3 (pid: 18328, cores: 1)
+spawned uWSGI worker 4 (pid: 18329, cores: 1)
+spawned uWSGI worker 5 (pid: 18330, cores: 1)
+spawned uWSGI worker 6 (pid: 18331, cores: 1)
+spawned uWSGI worker 7 (pid: 18332, cores: 1)
+spawned uWSGI worker 8 (pid: 18333, cores: 1)
+spawned uWSGI worker 9 (pid: 18334, cores: 1)
+spawned uWSGI worker 10 (pid: 18335, cores: 1)
+invalid request block size: 21327 (max 4096)...skip
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 01:22:47 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Set PythonHome to /root/yardstick_venv
+Python main interpreter initialized at 0xbdc440
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xbdc440 pid: 18609 (default app)
+spawned uWSGI master process (pid: 18609)
+spawned uWSGI worker 1 (pid: 18627, cores: 1)
+spawned uWSGI worker 2 (pid: 18628, cores: 1)
+spawned uWSGI worker 3 (pid: 18629, cores: 1)
+spawned uWSGI worker 4 (pid: 18630, cores: 1)
+spawned uWSGI worker 5 (pid: 18631, cores: 1)
+spawned uWSGI worker 6 (pid: 18632, cores: 1)
+spawned uWSGI worker 7 (pid: 18633, cores: 1)
+spawned uWSGI worker 8 (pid: 18634, cores: 1)
+spawned uWSGI worker 9 (pid: 18635, cores: 1)
+spawned uWSGI worker 10 (pid: 18636, cores: 1)
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 02:21:49 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Set PythonHome to /root/yardstick_venv
+Python main interpreter initialized at 0x17f3440
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x17f3440 pid: 20102 (default app)
+spawned uWSGI master process (pid: 20102)
+spawned uWSGI worker 1 (pid: 20118, cores: 1)
+spawned uWSGI worker 2 (pid: 20119, cores: 1)
+spawned uWSGI worker 3 (pid: 20120, cores: 1)
+spawned uWSGI worker 4 (pid: 20121, cores: 1)
+spawned uWSGI worker 5 (pid: 20122, cores: 1)
+spawned uWSGI worker 6 (pid: 20123, cores: 1)
+spawned uWSGI worker 7 (pid: 20124, cores: 1)
+spawned uWSGI worker 8 (pid: 20125, cores: 1)
+spawned uWSGI worker 9 (pid: 20126, cores: 1)
+spawned uWSGI worker 10 (pid: 20127, cores: 1)
+*** Starting uWSGI 2.0.13.1 (64bit) on [Tue Sep  6 02:23:29 2016] ***
+compiled with version: 4.8.4 on 05 September 2016 12:28:26
+os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
+nodename: 7d401655f39a
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 48
+current working directory: /home/kklt/kklt/api
+detected binary path: /root/yardstick_venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /home/kklt/kklt/api
+your processes number limit is 524288
+your memory page size is 4096 bytes
+detected max file descriptor number: 524288
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
+Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
+Set PythonHome to /root/yardstick_venv
+Python main interpreter initialized at 0xb48440
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 800448 bytes (781 KB) for 10 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xb48440 pid: 20375 (default app)
+spawned uWSGI master process (pid: 20375)
+spawned uWSGI worker 1 (pid: 20389, cores: 1)
+spawned uWSGI worker 2 (pid: 20390, cores: 1)
+spawned uWSGI worker 3 (pid: 20391, cores: 1)
+spawned uWSGI worker 4 (pid: 20392, cores: 1)
+spawned uWSGI worker 5 (pid: 20393, cores: 1)
+spawned uWSGI worker 6 (pid: 20394, cores: 1)
+spawned uWSGI worker 7 (pid: 20395, cores: 1)
+spawned uWSGI worker 8 (pid: 20396, cores: 1)
+spawned uWSGI worker 9 (pid: 20397, cores: 1)
+spawned uWSGI worker 10 (pid: 20398, cores: 1)
+[pid: 20398|app: 0|req: 1/1] 172.16.10.16 () {44 vars in 805 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/index.html => generated 0 bytes in 6 msecs (HTTP/1.1 304) 10 headers in 456 bytes (0 switches on core 0)
+[pid: 20398|app: 0|req: 2/2] 172.16.10.16 () {46 vars in 842 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/css/typography.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 3/3] 172.16.10.16 () {46 vars in 835 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/css/screen.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 1/4] 172.16.10.16 () {46 vars in 832 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/css/reset.css => generated 0 bytes in 6 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 4/5] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/jquery-1.8.0.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 2/6] 172.16.10.16 () {46 vars in 837 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/jquery.slideto.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 454 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 5/7] 172.16.10.16 () {46 vars in 835 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/jquery.wiggle.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 454 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 3/8] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/handlebars-2.0.0.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 6/9] 172.16.10.16 () {46 vars in 838 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/highlight.7.3.pack.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 455 bytes (1 switches on core 0)
+[pid: 20396|app: 0|req: 1/10] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/jquery.ba-bbq.min.js => generated 0 bytes in 6 msecs (HTTP/1.1 304) 10 headers in 455 bytes (0 switches on core 0)
+[pid: 20395|app: 0|req: 1/11] 172.16.10.16 () {46 vars in 832 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/underscore-min.js => generated 0 bytes in 5 msecs (HTTP/1.1 304) 10 headers in 457 bytes (0 switches on core 0)
+[pid: 20394|app: 0|req: 1/12] 172.16.10.16 () {46 vars in 828 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/backbone-min.js => generated 0 bytes in 5 msecs (HTTP/1.1 304) 10 headers in 457 bytes (0 switches on core 0)
+[pid: 20398|app: 0|req: 7/13] 172.16.10.16 () {46 vars in 816 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/marked.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 8/14] 172.16.10.16 () {46 vars in 829 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/js/swagger-oauth.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 4/15] 172.16.10.16 () {44 vars in 772 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/swagger-ui.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 9/16] 172.16.10.16 () {46 vars in 833 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/css/print.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 10/17] 172.16.10.16 () {46 vars in 857 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/images/logo_small.png => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 455 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 5/18] 172.16.10.16 () {44 vars in 759 bytes} [Tue Sep  6 02:23:51 2016] GET /specs => generated 107 bytes in 0 msecs (HTTP/1.1 200) 8 headers in 345 bytes (3 switches on core 0)
+[pid: 20398|app: 0|req: 11/19] 172.16.10.16 () {42 vars in 706 bytes} [Tue Sep  6 02:23:51 2016] GET /spec => generated 1226 bytes in 4 msecs (HTTP/1.1 200) 8 headers in 346 bytes (3 switches on core 0)
+[pid: 20398|app: 0|req: 12/20] 172.16.10.16 () {44 vars in 753 bytes} [Tue Sep  6 02:23:51 2016] GET /apidocs/images/favicon-16x16.png => generated 645 bytes in 0 msecs via sendfile() (HTTP/1.1 200) 13 headers in 536 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 13/21] 172.16.10.16 () {44 vars in 805 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/index.html => generated 0 bytes in 1 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 14/22] 172.16.10.16 () {46 vars in 842 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/css/typography.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 6/23] 172.16.10.16 () {46 vars in 832 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/css/reset.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 15/24] 172.16.10.16 () {46 vars in 835 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/css/screen.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20396|app: 0|req: 2/25] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/jquery-1.8.0.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 16/26] 172.16.10.16 () {46 vars in 837 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/jquery.slideto.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 454 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 7/27] 172.16.10.16 () {46 vars in 835 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/jquery.wiggle.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 454 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 17/28] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/jquery.ba-bbq.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 455 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 18/29] 172.16.10.16 () {46 vars in 836 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/handlebars-2.0.0.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 8/30] 172.16.10.16 () {46 vars in 832 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/underscore-min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 19/31] 172.16.10.16 () {46 vars in 828 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/backbone-min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20396|app: 0|req: 3/32] 172.16.10.16 () {46 vars in 826 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/swagger-ui.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 9/33] 172.16.10.16 () {46 vars in 838 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/highlight.7.3.pack.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 455 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 20/34] 172.16.10.16 () {46 vars in 816 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/marked.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20395|app: 0|req: 2/35] 172.16.10.16 () {46 vars in 829 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/js/swagger-oauth.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 456 bytes (1 switches on core 0)
+[pid: 20397|app: 0|req: 10/36] 172.16.10.16 () {46 vars in 833 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/css/print.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 10 headers in 457 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 21/37] 172.16.10.16 () {44 vars in 759 bytes} [Tue Sep  6 02:23:54 2016] GET /specs => generated 107 bytes in 0 msecs (HTTP/1.1 200) 8 headers in 345 bytes (3 switches on core 0)
+[pid: 20397|app: 0|req: 11/38] 172.16.10.16 () {44 vars in 753 bytes} [Tue Sep  6 02:23:54 2016] GET /apidocs/images/favicon-16x16.png => generated 645 bytes in 0 msecs via sendfile() (HTTP/1.1 200) 13 headers in 536 bytes (1 switches on core 0)
+[pid: 20398|app: 0|req: 22/39] 172.16.10.16 () {42 vars in 706 bytes} [Tue Sep  6 02:23:54 2016] GET /spec => generated 1226 bytes in 3 msecs (HTTP/1.1 200) 8 headers in 346 bytes (3 switches on core 0)
+[pid: 20398|app: 0|req: 23/40] 127.0.0.1 () {36 vars in 490 bytes} [Tue Sep  6 02:25:07 2016] POST /api/v3/yardstick/tasks/runner/ => generated 27 bytes in 0 msecs (HTTP/1.1 404) 8 headers in 351 bytes (3 switches on core 0)
