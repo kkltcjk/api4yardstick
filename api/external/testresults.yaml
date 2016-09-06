@@ -1,0 +1,28 @@
+Query task result data
+This api offer the interface to query the result data 
+we will return a result dict 
+
+---
+tags:
+  - testresults
+parameters:
+  - in: path
+    name: measurement 
+    type: string
+    description: testcase name 
+    required: true
+  - in: path
+    name: task_id 
+    type: string
+    description: the task_id you get before
+    required: true
+responses:
+  200:
+    description: A result json dict 
+    schema:
+      id: result_dict
+      properties:
+        result:
+          type: dict
+          description: the result dict 
+

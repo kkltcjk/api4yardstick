@@ -23,6 +23,7 @@ from yardstick.benchmark.contexts.base import Context
 from yardstick.benchmark.runners import base as base_runner
 from yardstick.common.task_template import TaskTemplate
 from yardstick.common.utils import cliargs
+from api.utils.InfluxUtils import write_data_influx
 
 output_file_default = "/tmp/yardstick.out"
 test_cases_dir_default = "tests/opnfv/test_cases/"
@@ -51,8 +52,17 @@ class TaskCommands(object):
              output_file_default, default=output_file_default)
     @cliargs("--suite", help="process test suite file instead of a task file",
              action="store_true")
-    def do_start(self, args):
+    def do_start(self, args, **kwargs):
         '''Start a benchmark scenario.'''
+
+        if 'task_id' in kwargs.keys():
+            task_id = kwargs['task_id']
+            timestamp = kwargs['timestamp']
+        else:
+            task_id = str(uuid.uuid4())
+            timestamp = str(int(float(time.time()) * 1000000000))
+
+        write_data_influx(task_id, timestamp, 0)
 
         atexit.register(atexit_handler)
 
@@ -81,7 +91,7 @@ class TaskCommands(object):
             one_task_start_time = time.time()
             parser.path = task_files[i]
             scenarios, run_in_parallel, meet_precondition = parser.parse_task(
-                 task_args[i], task_args_fnames[i])
+                 task_id, task_args[i], task_args_fnames[i])
 
             if not meet_precondition:
                 LOG.info("meet_precondition is %s, please check envrionment",
@@ -105,6 +115,8 @@ class TaskCommands(object):
         total_end_time = time.time()
         LOG.info("total finished in %d secs",
                  total_end_time - total_start_time)
+
+        write_data_influx(task_id, timestamp, 1)
 
         print "Done, exiting"
 
@@ -232,7 +244,7 @@ class TaskParser(object):
 
         return valid_task_files, valid_task_args, valid_task_args_fnames
 
-    def parse_task(self, task_args=None, task_args_file=None):
+    def parse_task(self, task_id, task_args=None, task_args_file=None):
         '''parses the task file and return an context and scenario instances'''
         print "Parsing task config:", self.path
 
@@ -291,7 +303,7 @@ class TaskParser(object):
         run_in_parallel = cfg.get("run_in_parallel", False)
 
         # add tc and task id for influxdb extended tags
-        task_id = str(uuid.uuid4())
+        # task_id = str(uuid.uuid4())
         for scenario in cfg["scenarios"]:
             task_name = os.path.splitext(os.path.basename(self.path))[0]
             scenario["tc"] = task_name
