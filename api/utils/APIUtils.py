@@ -13,6 +13,7 @@ from flask import request
 
 from yardstick.cmd.cli import YardstickCLI
 from utils.InfluxUtils import write_data_influx
+from utils.DaemonThread import DaemonThread
 from api.instance import celery
 
 @celery.task
@@ -67,16 +68,22 @@ class APIUtils(object):
         timestamp = str(int(float(time.time()) * 1000000000))
         write_data_influx(task_id, timestamp, 0)
 
-        # process = multiprocessing.Process(
-        #         target=YardstickCLI().main_api,
-        #         args=(command_list, task_id, timestamp))
-        # process.start()
-        do_back_task.delay(command_list, task_id, timestamp)
+        try:
+            # process = multiprocessing.Process(
+            #         target=YardstickCLI().main_api,
+            #         args=(command_list, task_id, timestamp))
+            # process.daemon = True
+            # process.start()
+            daemonthread = DaemonThread(YardstickCLI().main_api, (command_list, task_id, timestamp))
+            daemonthread.start()
+            # do_back_task.delay(command_list, task_id, timestamp)
+        except Exception, e:
+            print e
         return task_id
 
     def dispatch_task(self, cmd, opts, args):
 
-        command_list = ['-d', 'task']
+        command_list = ['task']
         command_list = self._get_command_list_influx(command_list, cmd, opts, args)
 
         task_id = self._exec_command_influx(command_list)
