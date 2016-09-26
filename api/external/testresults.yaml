@@ -6,12 +6,14 @@ we will return a result dict
 tags:
   - testresults
 parameters:
-  - in: path
+  - 
+    in: query
     name: measurement 
     type: string
     description: testcase name 
     required: true
-  - in: path
+  - 
+    in: query
     name: task_id 
     type: string
     description: the task_id you get before

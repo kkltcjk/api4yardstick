@@ -11,18 +11,25 @@ parameters:
     type: string
     description: this is the main cmd
     required: true
-  - in: path
-    name: cmd 
-    type: string
-    required: true
-  - in: path
-    name: opts 
-    type: binary
-    required: false
-  - name: args 
-    type: string
-    description: this is file path
-    required: false
+  - in: body
+    name: body 
+    schema:
+      id: StartModel
+      required:
+        - cmd
+        - args
+      properties:
+        cmd:
+          type: string
+          description: this is cmd
+          default: 'start'
+        opts:
+          schema:
+            id: OptsModel
+        args:
+          type: string
+          description: this is input file path
+          default: 'tc002'
 responses:
   200:
     description: A result json dict 

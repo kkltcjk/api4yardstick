@@ -18,6 +18,7 @@ import sys
 from pkg_resources import get_distribution
 from argparse import RawDescriptionHelpFormatter
 from oslo_config import cfg
+from oslo_config.cfg import ArgsAlreadyParsedError
 
 from yardstick.cmd.commands import task
 from yardstick.cmd.commands import runner
@@ -26,6 +27,7 @@ from yardstick.cmd.commands import testcase
 from yardstick.cmd.commands import plugin
 
 CONF = cfg.CONF
+
 cli_opts = [
     cfg.BoolOpt('debug',
                 short='d',
@@ -36,7 +38,11 @@ cli_opts = [
                 default=False,
                 help='increase output verbosity to info')
 ]
-CONF.register_cli_opts(cli_opts)
+
+try:
+    CONF.register_cli_opts(cli_opts)
+except ArgsAlreadyParsedError:
+    print "ArgsAlreadyParsedError"
 
 CONFIG_SEARCH_PATHS = [sys.prefix + "/etc/yardstick",
                        "~/.yardstick",
@@ -68,6 +74,7 @@ class YardstickCLI():
     def __init__(self):
         self._version = 'yardstick version %s ' % \
             get_distribution('yardstick').version
+
 
     def _find_actions(self, subparsers, actions_module):
         '''find action methods'''
@@ -111,7 +118,10 @@ class YardstickCLI():
                                          title="Command categories",
                                          help="Available categories",
                                          handler=parser)
-        CONF.register_cli_opt(category_opt)
+        try:
+            CONF.register_cli_opt(category_opt)
+        except ArgsAlreadyParsedError:
+            print "ArgsAlreadyParsedError"
 
     def _load_cli_config(self, argv):
 

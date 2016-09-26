@@ -61,8 +61,8 @@ class TaskCommands(object):
         else:
             task_id = str(uuid.uuid4())
             timestamp = str(int(float(time.time()) * 1000000000))
+            write_data_influx(task_id, timestamp, 0)
 
-        write_data_influx(task_id, timestamp, 0)
 
         atexit.register(atexit_handler)
 

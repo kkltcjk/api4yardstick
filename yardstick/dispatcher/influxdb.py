@@ -44,6 +44,9 @@ influx_dispatcher_opts = [
 
 CONF.register_opts(influx_dispatcher_opts, group="dispatcher_influxdb")
 
+client = requests.Session()
+client.keep_alive = False
+
 
 class InfluxdbDispatcher(DispatchBase):
     """Dispatcher class for posting data into an influxdb target.
@@ -153,7 +156,7 @@ class InfluxdbDispatcher(DispatchBase):
         try:
             line = self._data_to_line_protocol(data)
             LOG.debug('Test result line format : %s' % line)
-            res = requests.post(self.influxdb_url,
+            res = client.post(self.influxdb_url,
                                 data=line,
                                 auth=(self.username, self.password),
                                 timeout=self.timeout)

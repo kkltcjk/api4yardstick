@@ -1,36 +1,53 @@
-#!/usr/bin/python 
-import multiprocessing
-import uuid
+#!/usr/bin/python
 import os
 import requests
 import time
+import uuid
 
-from flask import Flask
 from flask import jsonify
 from flask import abort
-from flask import make_response
 from flask import request
 
-from celery import Celery
-from celery import platforms
-
+from flask_restful import fields
+from flask_restful_swagger import swagger
 from flasgger import Swagger
 from flasgger.utils import swag_from
 
-from utils.APIUtils import APIUtils
 import conf as CONF
-from instance import app
-from instance import celery
+from utils.APIUtils import APIUtils
+from instance import get_app
 
-platforms.C_FORCE_ROOT = True
+app = get_app()
 Swagger(app)
 
 query_url = CONF.query_url
 write_url = CONF.write_url
 
+
+@swagger.model
+class TaskArgModel:
+    resource_fields = {
+    }
+
+@swagger.model
+class OptsModel:
+    resource_fields = {
+            'task-args': TaskArgModel,
+            'keep-deploy': fields.String,
+            'suite': fields.String
+    }
+
+@swagger.model
+class StartModel:
+    resource_fields = {
+            'cmd': fields.String,
+            'opts': OptsModel,
+            'args': fields.String
+    }
+
 utils = APIUtils()
 
-@app.route('/api/v3/yardstick/tasks/<string:main_cmd>', methods = ['post']) 
+@app.route('/api/v3/yardstick/tasks/<string:main_cmd>', methods=['post'])
 @swag_from(os.path.abspath('.') + '/external/tasks.yaml')
 def tasks(main_cmd):
     cmd = request.json.get('cmd', '')
@@ -40,21 +57,36 @@ def tasks(main_cmd):
     command_list = ['task', 'runner', 'scenario', 'testcase', 'plugin']
     if main_cmd in command_list:
         method = getattr(utils, 'dispatch_' + main_cmd)
-        task_id = method(cmd, opts, args)
-        return jsonify({'task_id': task_id})
+        return method(cmd, opts, args)
     else:
         abort(404)
 
-@app.route('/api/v3/yardstick/testresults', methods = ['get'])
+
+@app.route('/api/v3/yardstick/testresults', methods=['get'])
 @swag_from(os.path.abspath('.') + '/external/testresults.yaml')
 def testresults():
     measurement = request.args.get('measurement')
+    measurement = 'opnfv_yardstick_' + measurement
     task_id = request.args.get('task_id')
-    url = query_url  % (measurement, task_id)
+
+    url = query_url % ('tasklist', task_id)
     try:
         resposne = requests.get(url)
         result = resposne.json()
-        return jsonify(result)
+        status = result['results'][0]['series'][0]['values'][0][2]
+
+        if status == 0:
+            return jsonify({'status': status})
+        elif status == 2:
+            return jsonify({'status': status, 'error': result['results'][0]['series'][0]['values'][0][1]})
+    except Exception:
+        abort(404)
+
+    url = query_url % (measurement, task_id)
+    try:
+        resposne = requests.get(url)
+        result = resposne.json()
+        return jsonify({'status': 1, 'result' : result})
     except Exception:
         abort(404)
 

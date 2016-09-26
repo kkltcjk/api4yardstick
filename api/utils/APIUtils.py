@@ -1,114 +1,127 @@
 import multiprocessing
 import uuid
 import os
-import requests
 import time
-import json
 
-from flask import Flask
 from flask import jsonify
 from flask import abort
-from flask import make_response
-from flask import request
 
 from yardstick.cmd.cli import YardstickCLI
 from utils.InfluxUtils import write_data_influx
 from utils.DaemonThread import DaemonThread
-from api.instance import celery
 
-@celery.task
-def do_back_task(command_list, task_id, timestamp):
-    YardstickCLI().main_api(command_list, task_id, timestamp)
 
 class APIUtils(object):
-    def _get_cmd(self, command_list, cmd):
-        if cmd not in command_list:
-            abort(404)
-        return ' ' + cmd
+    def _get_cmd(self, cmd):
+
+        cmd_list = []
+        cmd_list.append(cmd)
+        return cmd_list
 
     def _get_opts(self, opts):
-        options = ''
+
+        opts_list = []
         for key in opts.keys():
-            options += ' --' + key + ' ' + opts[key]
-        return options
+            opts_list.append('--' + key)
+            if len(opts[key]) > 0:
+                opts_list.append(opts[key])
+        return opts_list
 
     def _get_args(self, args):
+
+        args_list = []
         if len(args) == 0:
-            return ''
-        return ' ' + args
+            return args_list
+        args_list.append(args)
+        return args_list
 
-    def _get_command(self, command_list, cmd, opts, args):
-        command = ''
-        command += self._get_cmd(command_list, cmd)
-        command += self._get_opts(opts)
-        command += self._get_args(args)
-        return command
+    def _get_command_list(self, cmd, opts, args):
 
-    def _exec_command_nooutput(self, command):
+        command_list = []
+        command_list += self._get_cmd(cmd)
+        command_list += self._get_opts(opts)
+        command_list += self._get_args(args)
+        return command_list
+
+    def _exec_command_notask(self, command_list):
+
         try:
-            os.system(command)
-            return jsonify({'state': 'OK'})
+            daemonthread = DaemonThread(YardstickCLI().main, (command_list,))
+            daemonthread.start()
+            return jsonify({'status': 'SUCCESS'})
         except Exception, e:
             print e
-            abort(404)
+            return jsonify({'status': 'FAILED'})
 
     def _get_command_list_influx(self, command_list, cmd, opts, args):
 
         command_list.append(cmd)
         for key in opts.keys():
             command_list.append('--' + key)
-            command_list.append(opts[key])
+            if len(opts[key]) > 0:
+                command_list.append(opts[key])
         
         command_list.append(args)
         return command_list
 
-    def _exec_command_influx(self, command_list):
+    def _do_task(self, command_list, task_id, timestamp):
+        daemonthread = DaemonThread(YardstickCLI().main_api, (command_list, task_id, timestamp))
+        daemonthread.start()
 
-        task_id = str(uuid.uuid4())
+    def _exec_command_influx(self, command_list, task_id):
+
         timestamp = str(int(float(time.time()) * 1000000000))
         write_data_influx(task_id, timestamp, 0)
 
-        try:
-            # process = multiprocessing.Process(
-            #         target=YardstickCLI().main_api,
-            #         args=(command_list, task_id, timestamp))
-            # process.daemon = True
-            # process.start()
-            daemonthread = DaemonThread(YardstickCLI().main_api, (command_list, task_id, timestamp))
-            daemonthread.start()
-            # do_back_task.delay(command_list, task_id, timestamp)
-        except Exception, e:
-            print e
-        return task_id
+        self._do_task(command_list, task_id, timestamp)
+
+    def _create_test_suites_file(self, args, task_id):
+        with open('../tests/opnfv/test_suites/' + task_id + '.yaml', 'a') as f:
+            f.write("schema: 'yardstick:suite:0.1'\n")
+            f.write("name: " + task_id + "\n")
+            f.write("test_cases_dir: '../tests/opnfv/test_cases/'\n")
+            f.write("test_cases:\n")
+            for test_case in args:
+                f.write("-\n")
+                f.write("  file_name: opnfv_yardstick_" + test_case + ".yaml\n")
 
     def dispatch_task(self, cmd, opts, args):
 
-        command_list = ['task']
-        command_list = self._get_command_list_influx(command_list, cmd, opts, args)
+        command_list = ['-d', 'task']
+        # command_list = ['task']
 
-        task_id = self._exec_command_influx(command_list)
-        return task_id 
+        task_id = str(uuid.uuid4())
+
+        if isinstance(args, list):
+            self._create_test_suites_file(args, task_id)
+            opts['suite'] = ''
+            args = '../tests/opnfv/test_suites/' + task_id + '.yaml'
+        else:
+            args = '../tests/opnfv/test_cases/opnfv_yardstick_' + args + '.yaml'
+
+        command_list = self._get_command_list_influx(command_list, cmd, opts, args)
+        print command_list
+
+        self._exec_command_influx(command_list, task_id)
+        return jsonify({'task_id': task_id}) 
 
     def dispatch_runner(self, cmd, opts, args):
-        command = 'yardstick runner'
-        command_list = ['list', 'show']
-        command += self._get_command(command_list, cmd, opts, args)
-        return self._exec_command_nooutput(command)
+        command_list = ['runner']
+        command_list += self._get_command_list(cmd, opts, args)
+        return self._exec_command_notask(command_list)
 
     def dispatch_scenario(self, cmd, opts, args):
-        command = 'yardstick scenario'
-        command_list = ['list', 'show']
-        command += self._get_command(command_list, cmd, opts, args)
-        return self._exec_command_nooutput(command)
+        command_list = ['scenario']
+        command_list += self._get_command_list(cmd, opts, args)
+        return self._exec_command_notask(command_list)
 
     def dispatch_testcase(self, cmd, opts, args):
-        command = 'yardstick testcase'
-        command_list = ['list', 'show']
-        command += self._get_command(command_list, cmd, opts, args)
-        return self._exec_command_nooutput(command)
+        command_list = ['testcase']
+        command_list += self._get_command_list(cmd, opts, args)
+        print command_list
+        return self._exec_command_notask(command_list)
 
     def dispatch_plugin(self, cmd, opts, args):
-        command = 'yardstick plugin'
-        command_list = ['install', 'remove']
-        command += self._get_command(command_list, cmd, opts, args)
-        return self._exec_command(command)
+        command_list = ['plugin']
+        command_list += self._get_command_list(cmd, opts, args)
+        return self._exec_command_notask(command_list)
