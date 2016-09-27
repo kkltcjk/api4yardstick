@@ -2,6 +2,7 @@ import multiprocessing
 import uuid
 import os
 import time
+import json
 
 from flask import jsonify
 from flask import abort
@@ -24,7 +25,9 @@ class APIUtils(object):
         for key in opts.keys():
             opts_list.append('--' + key)
             if len(opts[key]) > 0:
-                opts_list.append(opts[key])
+                print type(opts[key])
+                opts_list.append(str(opts[key]))
+        print opts_list
         return opts_list
 
     def _get_args(self, args):
@@ -59,7 +62,7 @@ class APIUtils(object):
         for key in opts.keys():
             command_list.append('--' + key)
             if len(opts[key]) > 0:
-                command_list.append(opts[key])
+                command_list.append(str(opts[key]))
         
         command_list.append(args)
         return command_list

@@ -1,4 +1,4 @@
-*** Starting uWSGI 1.9.17.1-debian (64bit) on [Sat Sep 24 06:48:36 2016] ***
+*** Starting uWSGI 1.9.17.1-debian (64bit) on [Tue Sep 27 09:21:17 2016] ***
 compiled with version: 4.8.2 on 23 March 2014 17:15:32
 os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
 nodename: 4ea829be31bb
@@ -17,113 +17,7 @@ lock engine: pthread robust mutexes
 thunder lock: disabled (you can enable it with --thunder-lock)
 uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
 Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
-Python main interpreter initialized at 0x1570b50
-python threads support enabled
-your server socket listen backlog is limited to 100 connections
-your mercy for graceful operations on workers is 60 seconds
-mapped 800712 bytes (781 KB) for 10 cores
-*** Operational MODE: preforking ***
-/usr/local/lib/python2.7/dist-packages/flask/exthook.py:71: ExtDeprecationWarning: Importing flask.ext.restful is deprecated, use flask_restful instead.
-  .format(x=modname), ExtDeprecationWarning
-WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1570b50 pid: 749 (default app)
-spawned uWSGI master process (pid: 749)
-spawned uWSGI worker 1 (pid: 763, cores: 1)
-spawned uWSGI worker 2 (pid: 765, cores: 1)
-Python auto-reloader enabled
-spawned uWSGI worker 3 (pid: 767, cores: 1)
-spawned uWSGI worker 4 (pid: 769, cores: 1)
-spawned uWSGI worker 5 (pid: 771, cores: 1)
-spawned uWSGI worker 6 (pid: 773, cores: 1)
-spawned uWSGI worker 7 (pid: 775, cores: 1)
-spawned uWSGI worker 8 (pid: 777, cores: 1)
-spawned uWSGI worker 9 (pid: 779, cores: 1)
-spawned uWSGI worker 10 (pid: 781, cores: 1)
-[uwsgi-python-reloader] module/file ./app.py has been modified
-...gracefully killing workers...
-Gracefully killing worker 2 (pid: 765)...
-Gracefully killing worker 1 (pid: 763)...
-Gracefully killing worker 3 (pid: 767)...
-Gracefully killing worker 4 (pid: 769)...
-Gracefully killing worker 5 (pid: 771)...
-Gracefully killing worker 6 (pid: 773)...
-Gracefully killing worker 7 (pid: 775)...
-Gracefully killing worker 8 (pid: 777)...
-Gracefully killing worker 9 (pid: 779)...
-Gracefully killing worker 10 (pid: 781)...
-worker 1 buried after 1 seconds
-worker 2 buried after 1 seconds
-worker 3 buried after 1 seconds
-worker 4 buried after 1 seconds
-worker 5 buried after 1 seconds
-worker 6 buried after 1 seconds
-worker 7 buried after 1 seconds
-worker 8 buried after 1 seconds
-worker 9 buried after 1 seconds
-worker 10 buried after 1 seconds
-binary reloading uWSGI...
-chdir() to /home/kklt/kklt/api
-closing all non-uwsgi socket fds > 2 (max_fd = 524288)...
-found fd 3 mapped to socket 0 (/home/kklt/kklt/api/yardstick.sock)
-running /usr/bin/uwsgi-core
-[uWSGI] getting INI configuration from yardstick.ini
-*** Starting uWSGI 1.9.17.1-debian (64bit) on [Sat Sep 24 06:49:02 2016] ***
-compiled with version: 4.8.2 on 23 March 2014 17:15:32
-os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
-nodename: 4ea829be31bb
-machine: x86_64
-clock source: unix
-pcre jit disabled
-detected number of CPU cores: 48
-current working directory: /home/kklt/kklt/api
-detected binary path: /usr/bin/uwsgi-core
-uWSGI running as root, you can use --uid/--gid/--chroot options
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-your processes number limit is 524288
-your memory page size is 4096 bytes
-detected max file descriptor number: 524288
-lock engine: pthread robust mutexes
-thunder lock: disabled (you can enable it with --thunder-lock)
-uwsgi socket 0 inherited UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
-Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
-Python main interpreter initialized at 0x1da99a0
-python threads support enabled
-your server socket listen backlog is limited to 100 connections
-your mercy for graceful operations on workers is 60 seconds
-mapped 800712 bytes (781 KB) for 10 cores
-*** Operational MODE: preforking ***
-/usr/local/lib/python2.7/dist-packages/flask/exthook.py:71: ExtDeprecationWarning: Importing flask.ext.restful is deprecated, use flask_restful instead.
-  .format(x=modname), ExtDeprecationWarning
-WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1da99a0 pid: 749 (default app)
-gracefully (RE)spawned uWSGI master process (pid: 749)
-spawned uWSGI worker 1 (pid: 897, cores: 1)
-spawned uWSGI worker 2 (pid: 899, cores: 1)
-Python auto-reloader enabled
-spawned uWSGI worker 3 (pid: 901, cores: 1)
-spawned uWSGI worker 4 (pid: 903, cores: 1)
-spawned uWSGI worker 5 (pid: 905, cores: 1)
-spawned uWSGI worker 6 (pid: 907, cores: 1)
-spawned uWSGI worker 7 (pid: 909, cores: 1)
-spawned uWSGI worker 8 (pid: 911, cores: 1)
-spawned uWSGI worker 9 (pid: 913, cores: 1)
-spawned uWSGI worker 10 (pid: 915, cores: 1)
-*** Starting uWSGI 1.9.17.1-debian (64bit) on [Sat Sep 24 07:06:16 2016] ***
-compiled with version: 4.8.2 on 23 March 2014 17:15:32
-os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
-nodename: 4ea829be31bb
-machine: x86_64
-clock source: unix
-pcre jit disabled
-detected number of CPU cores: 48
-current working directory: /home/kklt/kklt/api
-detected binary path: /usr/bin/uwsgi-core
-your processes number limit is 524288
-your memory page size is 4096 bytes
-detected max file descriptor number: 524288
-lock engine: pthread robust mutexes
-thunder lock: disabled (you can enable it with --thunder-lock)
-uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
-Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
-Python main interpreter initialized at 0x1901ba0
+Python main interpreter initialized at 0x14dab70
 python threads support enabled
 your server socket listen backlog is limited to 100 connections
 your mercy for graceful operations on workers is 60 seconds
@@ -131,131 +25,15 @@ mapped 1255144 bytes (1225 KB) for 50 cores
 *** Operational MODE: preforking+threaded ***
 /usr/local/lib/python2.7/dist-packages/flask/exthook.py:71: ExtDeprecationWarning: Importing flask.ext.restful is deprecated, use flask_restful instead.
   .format(x=modname), ExtDeprecationWarning
-WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x1901ba0 pid: 1165 (default app)
-spawned uWSGI master process (pid: 1165)
-spawned uWSGI worker 1 (pid: 1179, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 2 (pid: 1181, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 3 (pid: 1185, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 4 (pid: 1192, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 5 (pid: 1198, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 6 (pid: 1204, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 7 (pid: 1209, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 8 (pid: 1213, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 9 (pid: 1219, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-spawned uWSGI worker 10 (pid: 1224, cores: 5)
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-[uwsgi-python-reloader] module/file ./utils/APIUtils.py has been modified
-...gracefully killing workers...
-Gracefully killing worker 3 (pid: 901)...
-Gracefully killing worker 2 (pid: 899)...
-Gracefully killing worker 1 (pid: 897)...
-Gracefully killing worker 4 (pid: 903)...
-Gracefully killing worker 5 (pid: 905)...
-Gracefully killing worker 6 (pid: 907)...
-Gracefully killing worker 7 (pid: 909)...
-Gracefully killing worker 8 (pid: 911)...
-Gracefully killing worker 9 (pid: 913)...
-Gracefully killing worker 10 (pid: 915)...
-worker 1 buried after 1 seconds
-worker 2 buried after 1 seconds
-worker 3 buried after 1 seconds
-worker 4 buried after 1 seconds
-worker 5 buried after 1 seconds
-worker 6 buried after 1 seconds
-worker 7 buried after 1 seconds
-worker 8 buried after 1 seconds
-worker 9 buried after 1 seconds
-worker 10 buried after 1 seconds
-binary reloading uWSGI...
-chdir() to /home/kklt/kklt/api
-closing all non-uwsgi socket fds > 2 (max_fd = 524288)...
-found fd 3 mapped to socket 0 (/home/kklt/kklt/api/yardstick.sock)
-running /usr/bin/uwsgi-core
-[uWSGI] getting INI configuration from yardstick.ini
-*** Starting uWSGI 1.9.17.1-debian (64bit) on [Sat Sep 24 07:17:42 2016] ***
-compiled with version: 4.8.2 on 23 March 2014 17:15:32
-os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
-nodename: 4ea829be31bb
-machine: x86_64
-clock source: unix
-pcre jit disabled
-detected number of CPU cores: 48
-current working directory: /home/kklt/kklt/api
-detected binary path: /usr/bin/uwsgi-core
-uWSGI running as root, you can use --uid/--gid/--chroot options
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-your processes number limit is 524288
-your memory page size is 4096 bytes
-detected max file descriptor number: 524288
-lock engine: pthread robust mutexes
-thunder lock: disabled (you can enable it with --thunder-lock)
-uwsgi socket 0 inherited UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
-Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
-Python main interpreter initialized at 0x9e2970
-python threads support enabled
-your server socket listen backlog is limited to 100 connections
-your mercy for graceful operations on workers is 60 seconds
-mapped 1255144 bytes (1225 KB) for 50 cores
-*** Operational MODE: preforking+threaded ***
-/usr/local/lib/python2.7/dist-packages/flask/exthook.py:71: ExtDeprecationWarning: Importing flask.ext.restful is deprecated, use flask_restful instead.
-  .format(x=modname), ExtDeprecationWarning
-WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x9e2970 pid: 749 (default app)
-gracefully (RE)spawned uWSGI master process (pid: 749)
-spawned uWSGI worker 1 (pid: 1569, cores: 5)
-spawned uWSGI worker 2 (pid: 1572, cores: 5)
-spawned uWSGI worker 3 (pid: 1577, cores: 5)
-spawned uWSGI worker 4 (pid: 1583, cores: 5)
-spawned uWSGI worker 5 (pid: 1588, cores: 5)
-spawned uWSGI worker 6 (pid: 1592, cores: 5)
-spawned uWSGI worker 7 (pid: 1599, cores: 5)
-spawned uWSGI worker 8 (pid: 1604, cores: 5)
-spawned uWSGI worker 9 (pid: 1609, cores: 5)
-spawned uWSGI worker 10 (pid: 1612, cores: 5)
-*** Starting uWSGI 1.9.17.1-debian (64bit) on [Sat Sep 24 11:33:43 2016] ***
-compiled with version: 4.8.2 on 23 March 2014 17:15:32
-os: Linux-3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015
-nodename: 4ea829be31bb
-machine: x86_64
-clock source: unix
-pcre jit disabled
-detected number of CPU cores: 48
-current working directory: /home/kklt/kklt/api
-detected binary path: /usr/bin/uwsgi-core
-uWSGI running as root, you can use --uid/--gid/--chroot options
-*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
-your processes number limit is 524288
-your memory page size is 4096 bytes
-detected max file descriptor number: 524288
-lock engine: pthread robust mutexes
-thunder lock: disabled (you can enable it with --thunder-lock)
-uwsgi socket 0 bound to UNIX address /home/kklt/kklt/api/yardstick.sock fd 3
-Python version: 2.7.6 (default, Jun 22 2015, 18:01:27)  [GCC 4.8.2]
-Python main interpreter initialized at 0x1f89b30
-python threads support enabled
-your server socket listen backlog is limited to 100 connections
-your mercy for graceful operations on workers is 60 seconds
-mapped 1255144 bytes (1225 KB) for 50 cores
-*** Operational MODE: preforking+threaded ***
-/usr/local/lib/python2.7/dist-packages/flask/exthook.py:71: ExtDeprecationWarning: Importing flask.ext.restful is deprecated, use flask_restful instead.
-  .format(x=modname), ExtDeprecationWarning
-WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x1f89b30 pid: 2497 (default app)
-spawned uWSGI master process (pid: 2497)
-spawned uWSGI worker 1 (pid: 2511, cores: 5)
-spawned uWSGI worker 2 (pid: 2513, cores: 5)
-spawned uWSGI worker 3 (pid: 2521, cores: 5)
-spawned uWSGI worker 4 (pid: 2525, cores: 5)
-spawned uWSGI worker 5 (pid: 2530, cores: 5)
-spawned uWSGI worker 6 (pid: 2535, cores: 5)
-spawned uWSGI worker 7 (pid: 2540, cores: 5)
-spawned uWSGI worker 8 (pid: 2545, cores: 5)
-spawned uWSGI worker 9 (pid: 2550, cores: 5)
-spawned uWSGI worker 10 (pid: 2555, cores: 5)
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x14dab70 pid: 29117 (default app)
+spawned uWSGI master process (pid: 29117)
+spawned uWSGI worker 1 (pid: 29131, cores: 5)
+spawned uWSGI worker 2 (pid: 29133, cores: 5)
+spawned uWSGI worker 3 (pid: 29141, cores: 5)
+spawned uWSGI worker 4 (pid: 29144, cores: 5)
+spawned uWSGI worker 5 (pid: 29151, cores: 5)
+spawned uWSGI worker 6 (pid: 29156, cores: 5)
+spawned uWSGI worker 7 (pid: 29159, cores: 5)
+spawned uWSGI worker 8 (pid: 29166, cores: 5)
+spawned uWSGI worker 9 (pid: 29171, cores: 5)
+spawned uWSGI worker 10 (pid: 29176, cores: 5)

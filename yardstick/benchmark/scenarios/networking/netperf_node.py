@@ -129,13 +129,15 @@ class NetperfNode(base.Scenario):
         else:
             testlen = 20
 
-        cmd_args = "-H %s -l %s -t %s" % (ipaddr, testlen, testname)
+        cmd_args = "-H %s -l %s -t %s -c -C" % (ipaddr, testlen, testname)
 
         # get test specific options
-        default_args = "-O 'THROUGHPUT,THROUGHPUT_UNITS,MEAN_LATENCY'"
-        cmd_args += " -- %s" % default_args
+        default_args = "-O 'THROUGHPUT, MEAN_LATENCY, LOCAL_CPU_UTIL, REMOTE_CPU_UTIL, LOCAL_TRANSPORT_RETRANS'"
+        cmd_args += " -- -d rr"
         option_pair_list = [("send_msg_size", "-m"),
                             ("recv_msg_size", "-M"),
+                            ("send_cache_size", "-s"),
+                            ("recv_cache_size", "-S"),
                             ("req_rsp_size", "-r")]
         for option_pair in option_pair_list:
             if option_pair[0] in options:
@@ -150,19 +152,8 @@ class NetperfNode(base.Scenario):
             raise RuntimeError(stderr)
 
         result.update(json.loads(stdout))
-
-        if result['mean_latency'] == '':
-            raise RuntimeError(stdout)
-
-        # sla check
-        mean_latency = float(result['mean_latency'])
-        if "sla" in self.scenario_cfg:
-            sla_max_mean_latency = int(
-                self.scenario_cfg["sla"]["mean_latency"])
-
-            assert mean_latency <= sla_max_mean_latency, \
-                "mean_latency %f > sla_max_mean_latency(%f); " % \
-                (mean_latency, sla_max_mean_latency)
+        print result
+        LOG.debug("Result: %s", stdout)
 
     def teardown(self):
         '''remove netperf from nodes after test'''
