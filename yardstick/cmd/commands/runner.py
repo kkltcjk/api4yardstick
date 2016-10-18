@@ -22,17 +22,30 @@ class RunnerCommands(object):
 
     def do_list(self, args):
         '''List existing runner types'''
+        runner_list = []
         types = Runner.get_types()
         print_hbar(78)
         print("| %-16s | %-60s" % ("Type", "Description"))
         print_hbar(78)
         for rtype in types:
+
+            runner = {
+                    'Type': rtype.__execution_type__,
+                    'Description': rtype.__doc__.split("\n")[0]
+                    }
+            runner_list.append(runner)
+
             print "| %-16s | %-60s" % (rtype.__execution_type__,
                                        rtype.__doc__.split("\n")[0])
         print_hbar(78)
+
+        return runner_list
 
     @cliargs("type", type=str, help="runner type", nargs=1)
     def do_show(self, args):
         '''Show details of a specific runner type'''
         rtype = Runner.get_cls(args.type[0])
         print rtype.__doc__
+
+        doc_list = rtype.__doc__.split("\n")
+        return doc_list

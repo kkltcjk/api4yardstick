@@ -40,3 +40,14 @@ nodes:
     ip: 192.168.10.14
     user: root
     password: root
+-
+    name: node6
+    role: Controller
+    ip: 192.168.23.137
+    user: ubuntu
+-
+    name: node7
+    role: Controller
+    ip: 192.168.23.138
+    user: ubuntu
+

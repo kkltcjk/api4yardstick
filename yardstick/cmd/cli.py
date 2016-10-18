@@ -75,7 +75,6 @@ class YardstickCLI():
         self._version = 'yardstick version %s ' % \
             get_distribution('yardstick').version
 
-
     def _find_actions(self, subparsers, actions_module):
         '''find action methods'''
         # Find action methods inside actions_module and
@@ -145,7 +144,7 @@ class YardstickCLI():
 
         # dispatch to category parser
         func = CONF.category.func
-        func(CONF.category)
+        return func(CONF.category)
 
     def _dispath_func_output(self, task_id, timestamp):
 
@@ -161,7 +160,7 @@ class YardstickCLI():
 
         self._handle_global_opts()
 
-        self._dispath_func_noutput()
+        return self._dispath_func_noutput()
 
     def main_api(self, argv, task_id, timestamp):
         '''run the command line interface'''

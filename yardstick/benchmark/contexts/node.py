@@ -12,6 +12,7 @@ import yaml
 import logging
 
 from yardstick.benchmark.contexts.base import Context
+from yardstick.definitions import ROOT_PATH
 
 LOG = logging.getLogger(__name__)
 
@@ -34,6 +35,7 @@ class NodeContext(Context):
         '''initializes itself from the supplied arguments'''
         self.name = attrs["name"]
         self.file_path = attrs.get("file", "/etc/yardstick/nodes/pod.yaml")
+        self.file_path = ROOT_PATH + '/' + self.file_path
 
         LOG.info("Parsing pod file: %s", self.file_path)
 

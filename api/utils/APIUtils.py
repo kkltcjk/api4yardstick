@@ -1,11 +1,7 @@
-import multiprocessing
 import uuid
-import os
 import time
-import json
 
 from flask import jsonify
-from flask import abort
 
 from yardstick.cmd.cli import YardstickCLI
 from utils.InfluxUtils import write_data_influx
@@ -25,9 +21,7 @@ class APIUtils(object):
         for key in opts.keys():
             opts_list.append('--' + key)
             if len(opts[key]) > 0:
-                print type(opts[key])
                 opts_list.append(str(opts[key]))
-        print opts_list
         return opts_list
 
     def _get_args(self, args):
@@ -49,12 +43,11 @@ class APIUtils(object):
     def _exec_command_notask(self, command_list):
 
         try:
-            daemonthread = DaemonThread(YardstickCLI().main, (command_list,))
-            daemonthread.start()
-            return jsonify({'status': 'SUCCESS'})
+            result_list = YardstickCLI().main(command_list)
+            return jsonify({'status': 'SUCCESS', 'result_list': result_list})
         except Exception, e:
             print e
-            return jsonify({'status': 'FAILED'})
+            return jsonify({'status': 'FAILED', 'result_list': ''})
 
     def _get_command_list_influx(self, command_list, cmd, opts, args):
 
@@ -63,12 +56,13 @@ class APIUtils(object):
             command_list.append('--' + key)
             if len(opts[key]) > 0:
                 command_list.append(str(opts[key]))
-        
+
         command_list.append(args)
         return command_list
 
     def _do_task(self, command_list, task_id, timestamp):
-        daemonthread = DaemonThread(YardstickCLI().main_api, (command_list, task_id, timestamp))
+        daemonthread = DaemonThread(YardstickCLI().main_api,
+                                    (command_list, task_id, timestamp))
         daemonthread.start()
 
     def _exec_command_influx(self, command_list, task_id):
@@ -86,7 +80,8 @@ class APIUtils(object):
             f.write("test_cases:\n")
             for test_case in args:
                 f.write("-\n")
-                f.write("  file_name: opnfv_yardstick_" + test_case + ".yaml\n")
+                f.write("  file_name: opnfv_yardstick_" +
+                        test_case + ".yaml\n")
 
     def dispatch_task(self, cmd, opts, args):
 
@@ -100,13 +95,15 @@ class APIUtils(object):
             opts['suite'] = ''
             args = '../tests/opnfv/test_suites/' + task_id + '.yaml'
         else:
-            args = '../tests/opnfv/test_cases/opnfv_yardstick_' + args + '.yaml'
+            args = '../tests/opnfv/test_cases/opnfv_yardstick_' + \
+                args + '.yaml'
 
-        command_list = self._get_command_list_influx(command_list, cmd, opts, args)
+        command_list = self._get_command_list_influx(command_list, cmd,
+                                                     opts, args)
         print command_list
 
         self._exec_command_influx(command_list, task_id)
-        return jsonify({'task_id': task_id}) 
+        return jsonify({'task_id': task_id})
 
     def dispatch_runner(self, cmd, opts, args):
         command_list = ['runner']
@@ -121,10 +118,39 @@ class APIUtils(object):
     def dispatch_testcase(self, cmd, opts, args):
         command_list = ['testcase']
         command_list += self._get_command_list(cmd, opts, args)
-        print command_list
         return self._exec_command_notask(command_list)
 
     def dispatch_plugin(self, cmd, opts, args):
         command_list = ['plugin']
+        args = '../plugin/' + args + '.yaml'
         command_list += self._get_command_list(cmd, opts, args)
-        return self._exec_command_notask(command_list)
+
+        daemonthread = DaemonThread(YardstickCLI().main, (command_list,))
+        daemonthread.start()
+        # return self._exec_command_notask(command_list)
+        return jsonify({'status': 'SUCCESS'})
+
+    def translate_influxdb_result(self, influxdb_result):
+        if 'series' not in influxdb_result['results'][0].keys():
+            results = {
+                'name': '',
+                'values': []
+            }
+            return results
+
+        data = influxdb_result['results'][0]['series'][0]
+        results = {}
+
+        columns = data['columns']
+        values = data['values']
+
+        result_list = []
+        for value in values:
+            r = {}
+            for i in range(len(columns)):
+                r[columns[i]] = value[i]
+            result_list.append(r)
+
+        results['name'] = data['name']
+        results['values'] = result_list
+        return results

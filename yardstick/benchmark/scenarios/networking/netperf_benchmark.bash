@@ -1,15 +1,5 @@
 #!/bin/bash
-
-##############################################################################
-# Copyright (c) 2015 Huawei Technologies Co.,Ltd and others.
-#
-# All rights reserved. This program and the accompanying materials
-# are made available under the terms of the Apache License, Version 2.0
-# which accompanies this distribution, and is available at
-# http://www.apache.org/licenses/LICENSE-2.0
-##############################################################################
-
-set -e
+OPTIONS_SIZE="$#"
 
 # Commandline arguments
 OPTIONS="$*"
@@ -18,24 +8,46 @@ OUTPUT_FILE=/tmp/netperf-out.log
 # run netperf test
 run_netperf()
 {
-    netperf $OPTIONS -O "THROUGHPUT, MEAN_LATENCY, LOCAL_CPU_UTIL, REMOTE_CPU_UTIL, LOCAL_SEND_SIZE, LOCAL_TRANSPORT_RETRANS" > $OUTPUT_FILE
+    netperf $OPTIONS > $OUTPUT_FILE
 }
 
 # write the result to stdout in json format
 output_json()
 {
-    thoughtoutput=$(sed -n '$p' $OUTPUT_FILE | awk '{print $1}')
-    mean_lantcy=$(sed -n '$p' $OUTPUT_FILE | awk '{print $2}')
-    local_cpu_locd=$(sed -n '$p' $OUTPUT_FILE | awk '{print $3}')
-    remote_cpu_load=$(sed -n '$p' $OUTPUT_FILE | awk '{print $4}')
-    local_tran_retran=$(sed -n '$p' $OUTPUT_FILE | awk '{print $5}')    
-    echo -e "{ \
-        \"troughput\":\"$thoughtoutput\", \
-        \"mean_latency\":\"$mean_lantcy\", \
-        \"local_cpu_load\":\"$local_cpu_locd\", \
-        \"remote_cpu_load\":\"$remote_cpu_load\", \
-        \"local_tran_retran\":\"$local_tran_retran\" \
-    }"
+    #ARR=($OPTIONS)
+    #declare -p ARR
+    read -a ARR <<< $OPTIONS
+    opt_size=0
+    while [ $opt_size -lt $OPTIONS_SIZE ] 
+    do
+        if [ "${ARR[$opt_size]}" = "-O" ]
+        then
+            break
+        fi
+        opt_size=$((opt_size+1))
+    done
+    opt_size=$((opt_size+1))
+    out_opt="${ARR[$opt_size]}"
+    IFS=, read -r -a PARTS <<< $out_opt
+    #declare -p PARTS
+    part_num=${#PARTS[*]}
+    tran_num=0
+    for f in ${PARTS[@]}
+    do
+        array_name[$tran_num]=$(echo $f | tr '[A-Z]' '[a-z]')
+        tran_num=$((tran_num+1))
+    done
+    read -a DATA_PARTS <<< $(sed -n '$p' $OUTPUT_FILE)
+    out_str="{"
+    for((i=0;i<part_num-1;i++))
+    do
+        modify_str=\"${array_name[i]}\":\"${DATA_PARTS[i]}\",
+        out_str=$out_str$modify_str
+    done
+    modify_str=\"${array_name[part_num-1]}\":\"${DATA_PARTS[part_num-1]}\"
+    out_str=$out_str$modify_str"}"
+
+    echo -e "$out_str"
 }
 
 # main entry
@@ -49,3 +61,4 @@ main()
 }
 
 main
+

@@ -70,18 +70,33 @@ class NetperfNode(base.Scenario):
         self.target_ip = target.get('ip', None)
         host_password = host.get('password', None)
         target_password = target.get('password', None)
+        key_dir = pkg_resources.resource_filename(
+                    'yardstick.resources.files', 'yardstick_key')
+        if target_password is not None:
+            LOG.debug("Log in via pw, user:%s, host:%s, password:%s",
+                      target_user, target_ip, target_password)
+            self.server = ssh.SSH(target_user, target_ip,
+                                  password=target_password)
+        else:
+            target_keyfile = target.get('key_filename', key_dir)
+            LOG.debug("Log in via key, user:%s, host:%s, key_filename:%s",
+                      target_user, target_ip, target_keyfile)
+            self.server = ssh.SSH(target_user, target_ip,
+                                  key_filename=target_keyfile)
+        self.server.wait(timeout=60)
 
-        LOG.info("host_pw:%s, target_pw:%s", host_password, target_password)
-        # netserver start automatically during the vm boot
-        LOG.info("user:%s, target:%s", target_user, target_ip)
-        self.server = ssh.SSH(target_user, target_ip,
-                              password=target_password)
-        self.server.wait(timeout=600)
-
-        LOG.info("user:%s, host:%s", host_user, host_ip)
-        self.client = ssh.SSH(host_user, host_ip,
-                              password=host_password)
-        self.client.wait(timeout=600)
+        if host_password is not None:
+            LOG.debug("Log in via pw, user:%s, host:%s, password:%s",
+                      host_user, host_ip, host_password)
+            self.client = ssh.SSH(host_user, host_ip,
+                                  password=host_password)
+        else:
+            host_keyfile = target.get('key_filename', key_dir)
+            LOG.debug("Log in via key, user:%s, host:%s, key_filename:%s",
+                      host_user, host_ip, host_keyfile)
+            self.client = ssh.SSH(host_user, host_ip,
+                                  key_filename=host_keyfile)
+        self.client.wait(timeout=60)
 
         # copy script to host
         self.client.run("cat > ~/netperf.sh",
@@ -132,8 +147,9 @@ class NetperfNode(base.Scenario):
         cmd_args = "-H %s -l %s -t %s -c -C" % (ipaddr, testlen, testname)
 
         # get test specific options
-        default_args = "-O 'THROUGHPUT, MEAN_LATENCY, LOCAL_CPU_UTIL, REMOTE_CPU_UTIL, LOCAL_TRANSPORT_RETRANS'"
-        cmd_args += " -- -d rr"
+        output_opt = options.get("output_opt", None)
+        default_args = "-O %s" % output_opt
+        cmd_args += " -- %s" % default_args
         option_pair_list = [("send_msg_size", "-m"),
                             ("recv_msg_size", "-M"),
                             ("send_cache_size", "-s"),

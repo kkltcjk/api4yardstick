@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import os
 import requests
-import time
-import uuid
 
 from flask import jsonify
 from flask import abort
@@ -29,6 +27,7 @@ class TaskArgModel:
     resource_fields = {
     }
 
+
 @swagger.model
 class OptsModel:
     resource_fields = {
@@ -36,6 +35,7 @@ class OptsModel:
             'keep-deploy': fields.String,
             'suite': fields.String
     }
+
 
 @swagger.model
 class StartModel:
@@ -46,6 +46,7 @@ class StartModel:
     }
 
 utils = APIUtils()
+
 
 @app.route('/api/v3/yardstick/tasks/<string:main_cmd>', methods=['post'])
 @swag_from(os.path.abspath('.') + '/external/tasks.yaml')
@@ -73,22 +74,24 @@ def testresults():
     try:
         resposne = requests.get(url)
         result = resposne.json()
-        status = result['results'][0]['series'][0]['values'][0][2]
+        result = utils.translate_influxdb_result(result)
+        status = result['values'][0]['status']
 
         if status == 0:
             return jsonify({'status': status})
         elif status == 2:
-            return jsonify({'status': status, 'error': result['results'][0]['series'][0]['values'][0][1]})
-    except Exception:
-        abort(404)
+            return jsonify({'status': status, 'error': result['values'][0]['error']})
+    except Exception, e:
+        raise e
 
     url = query_url % (measurement, task_id)
     try:
         resposne = requests.get(url)
         result = resposne.json()
-        return jsonify({'status': 1, 'result' : result})
-    except Exception:
-        abort(404)
+        result = utils.translate_influxdb_result(result)
+        return jsonify({'status': 1, 'results': result})
+    except Exception, e:
+        raise e
 
 
 if __name__ == '__main__':

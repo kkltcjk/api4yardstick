@@ -39,6 +39,7 @@
 
 """
 import sys
+import os
 
 from yardstick.cmd.cli import YardstickCLI
 

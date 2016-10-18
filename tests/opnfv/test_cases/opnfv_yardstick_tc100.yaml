@@ -9,13 +9,14 @@
 
 schema: "yardstick:task:0.1"
 
-{% set host = host or "node1.LF" %}
-{% set target = target or "node2.LF" %}
-{% set pod_info = pod_info or "etc/yardstick/nodes/compass_sclab_virtual/pod.yaml" %}
+{% set host = host or "node7.LF" %}
+{% set target = target or "node6.LF" %}
+{% set pod_info = pod_info or "etc/yardstick/nodes/compass_sclab_physical/pod.yaml" %}
 {% set tx_msg_size = tx_msg_size or "65536" %}
 {% set rx_msg_size = rx_msg_size or "87380" %}
 {% set tx_cache_size = tx_cache_size or "32768" %}
 {% set rx_cache_size = rx_cache_size or "43690" %}
+{% set out_opt = out_opt or "THROUGHPUT,THROUGHPUT_UNITS,MEAN_LATENCY,LOCAL_CPU_UTIL,REMOTE_CPU_UTIL,LOCAL_TRANSPORT_RETRANS" %}
 
 scenarios:
 -
@@ -27,6 +28,7 @@ scenarios:
     send_cache_size: {{tx_cache_size}}
     recv_cache_size: {{rx_cache_size}}
     duration: 20
+    output_opt: {{out_opt}}
 
   host: {{host}}
   target: {{target}}
@@ -35,6 +37,8 @@ scenarios:
     type: Iteration
     iterations: 1
     interval: 1
+    run_step: 'setup,run'
+
   sla:
     mean_latency: 100
     action: monitor

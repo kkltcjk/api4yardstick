@@ -15,6 +15,8 @@ import os
 import yaml
 import sys
 
+from yardstick.definitions import ROOT_PATH
+
 
 class TestcaseCommands(object):
     '''Testcase commands.
@@ -22,7 +24,9 @@ class TestcaseCommands(object):
        Set of commands to discover and display test cases.
     '''
     def __init__(self):
-        self.test_case_path = 'tests/opnfv/test_cases/'
+        # print ROOT_PATH
+        # self.test_case_path = 'tests/opnfv/test_cases/'
+        self.test_case_path = ROOT_PATH + '/tests/opnfv/test_cases/'
         self.testcase_list = []
 
     def do_list(self, args):
@@ -40,19 +44,22 @@ class TestcaseCommands(object):
             record = self._get_record(testcase_file)
             self.testcase_list.append(record)
 
-        self._format_print(self.testcase_list)
-        return True
+        return_testcase_list = self._format_print(self.testcase_list)
+        return return_testcase_list
 
     @cliargs("casename", type=str, help="test case name", nargs=1)
     def do_show(self, args):
         '''Show details of a specific test case'''
         testcase_name = args.casename[0]
         testcase_path = self.test_case_path + testcase_name + ".yaml"
+
+        testcase_info_list = []
         try:
             with open(testcase_path) as f:
                 try:
                     testcase_info = f.read()
                     print testcase_info
+                    testcase_info_list.append(testcase_info)
 
                 except Exception as e:
                     print(("Failed to load test cases:"
@@ -61,7 +68,8 @@ class TestcaseCommands(object):
                     raise e
         except IOError as ioerror:
             sys.exit(ioerror)
-        return True
+
+        return testcase_info_list
 
     def _get_record(self, testcase_file):
 
@@ -102,11 +110,20 @@ class TestcaseCommands(object):
 
     def _format_print(self, testcase_list):
         '''format output'''
+        return_testcase_list = []
 
         print_hbar(88)
         print("| %-21s | %-60s" % ("Testcase Name", "Description"))
         print_hbar(88)
         for testcase_record in testcase_list:
+
+            testcase = {
+                'Testcase Name': testcase_record['Name'],
+                'Description': testcase_record['Description']
+            }
+            return_testcase_list.append(testcase)
+
             print "| %-16s | %-60s" % (testcase_record['Name'],
                                        testcase_record['Description'])
         print_hbar(88)
+        return return_testcase_list

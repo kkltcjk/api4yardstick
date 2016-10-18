@@ -22,17 +22,30 @@ class ScenarioCommands(object):
 
     def do_list(self, args):
         '''List existing scenario types'''
+        scenario_list = []
         types = Scenario.get_types()
         print_hbar(78)
         print("| %-16s | %-60s" % ("Type", "Description"))
         print_hbar(78)
         for stype in types:
+
+            scenario = {
+                    'Type': stype.__scenario_type__,
+                    'Description': stype.__doc__.split("\n")[0]
+                    }
+            scenario_list.append(scenario)
+
             print("| %-16s | %-60s" % (stype.__scenario_type__,
                                        stype.__doc__.split("\n")[0]))
         print_hbar(78)
+
+        return scenario_list
 
     @cliargs("type", type=str, help="runner type", nargs=1)
     def do_show(self, args):
         '''Show details of a specific scenario type'''
         stype = Scenario.get_cls(args.type[0])
         print stype.__doc__
+
+        doc_list = stype.__doc__.split("\n")
+        return doc_list

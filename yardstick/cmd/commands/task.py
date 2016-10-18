@@ -63,7 +63,6 @@ class TaskCommands(object):
             timestamp = str(int(float(time.time()) * 1000000000))
             write_data_influx(task_id, timestamp, 0)
 
-
         atexit.register(atexit_handler)
 
         total_start_time = time.time()
@@ -296,6 +295,7 @@ class TaskParser(object):
                 # config external_network based on env var
                 cfg_attrs["networks"][sorted_networks[0]]["external_network"] \
                     = os.environ.get("EXTERNAL_NETWORK", "net04_ext")
+                # cfg_attrs['name'] = cfg_attrs['name'] + '-' + task_id[:8]
 
             context = Context.get(context_type)
             context.init(cfg_attrs)
