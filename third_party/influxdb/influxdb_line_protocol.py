@@ -88,7 +88,6 @@ def make_lines(data):
     """
     lines = []
     static_tags = data.get('tags', None)
-    print "=========================================="
     for point in data['points']:
         elements = []
 

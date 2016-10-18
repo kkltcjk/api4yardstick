@@ -63,6 +63,8 @@ class TaskCommands(object):
             timestamp = str(int(float(time.time()) * 1000000000))
             write_data_influx(task_id, timestamp, 0)
 
+        self.task_id = task_id
+
         atexit.register(atexit_handler)
 
         total_start_time = time.time()
@@ -90,7 +92,7 @@ class TaskCommands(object):
             one_task_start_time = time.time()
             parser.path = task_files[i]
             scenarios, run_in_parallel, meet_precondition = parser.parse_task(
-                 task_id, task_args[i], task_args_fnames[i])
+                 self.task_id, task_args[i], task_args_fnames[i])
 
             if not meet_precondition:
                 LOG.info("meet_precondition is %s, please check envrionment",
@@ -129,14 +131,15 @@ class TaskCommands(object):
         # Start all background scenarios
         for scenario in ifilter(_is_background_scenario, scenarios):
             scenario["runner"] = dict(type="Duration", duration=1000000000)
-            runner = run_one_scenario(scenario, output_file)
+            runner = run_one_scenario(self.task_id, scenario, output_file)
             background_runners.append(runner)
 
         runners = []
         if run_in_parallel:
             for scenario in scenarios:
                 if not _is_background_scenario(scenario):
-                    runner = run_one_scenario(scenario, output_file)
+                    runner = run_one_scenario(self.task_id, scenario,
+                                              output_file)
                     runners.append(runner)
 
             # Wait for runners to finish
@@ -147,7 +150,8 @@ class TaskCommands(object):
             # run serially
             for scenario in scenarios:
                 if not _is_background_scenario(scenario):
-                    runner = run_one_scenario(scenario, output_file)
+                    runner = run_one_scenario(self.task_id, scenario,
+                                              output_file)
                     runner_join(runner)
                     print "Runner ended, output in", output_file
 
@@ -295,8 +299,8 @@ class TaskParser(object):
                 # config external_network based on env var
                 cfg_attrs["networks"][sorted_networks[0]]["external_network"] \
                     = os.environ.get("EXTERNAL_NETWORK", "net04_ext")
-                # cfg_attrs['name'] = cfg_attrs['name'] + '-' + task_id[:8]
 
+            cfg_attrs['name'] = cfg_attrs['name'] + '-' + task_id[:8]
             context = Context.get(context_type)
             context.init(cfg_attrs)
 
@@ -406,7 +410,7 @@ def _is_background_scenario(scenario):
         return False
 
 
-def run_one_scenario(scenario_cfg, output_file):
+def run_one_scenario(task_id, scenario_cfg, output_file):
     '''run one scenario using context'''
     runner_cfg = scenario_cfg["runner"]
     runner_cfg['output_filename'] = output_file
@@ -414,9 +418,11 @@ def run_one_scenario(scenario_cfg, output_file):
     # TODO support get multi hosts/vms info
     context_cfg = {}
     if "host" in scenario_cfg:
+        scenario_cfg['host'] = scenario_cfg['host'] + '-' + task_id[:8]
         context_cfg['host'] = Context.get_server(scenario_cfg["host"])
 
     if "target" in scenario_cfg:
+        scenario_cfg['target'] = scenario_cfg['target'] + '-' + task_id[:8]
         if is_ip_addr(scenario_cfg["target"]):
             context_cfg['target'] = {}
             context_cfg['target']["ipaddr"] = scenario_cfg["target"]
