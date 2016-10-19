@@ -49,15 +49,28 @@ class APIUtils(object):
             print e
             return jsonify({'status': 'FAILED', 'result_list': ''})
 
+    def translate_to_str(self, object):
+        if isinstance(object, dict):
+            dic = {str(k): self.translate_to_str(v) for k, v in object.items()}
+            return dic
+        elif isinstance(object, list):
+            return [self.translate_to_str(ele) for ele in object]
+        elif isinstance(object, unicode):
+            return str(object)
+        return object
+
     def _get_command_list_influx(self, command_list, cmd, opts, args):
 
         command_list.append(cmd)
         for key in opts.keys():
-            command_list.append('--' + key)
-            if len(opts[key]) > 0:
-                command_list.append(str(opts[key]))
+            if 'task-args' != key:
+                command_list.append('--' + key)
 
         command_list.append(args)
+        if 'task-args' in opts.keys():
+            command_list.append('--' + 'task-args')
+            command_list.append(str(opts['task-args']))
+
         return command_list
 
     def _do_task(self, command_list, task_id, timestamp):
@@ -80,8 +93,6 @@ class APIUtils(object):
             f.write("test_cases:\n")
             for test_case in args:
                 f.write("-\n")
-                f.write("  file_name: opnfv_yardstick_" +
-                        test_case + ".yaml\n")
 
     def dispatch_task(self, cmd, opts, args):
 

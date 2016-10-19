@@ -51,9 +51,9 @@ utils = APIUtils()
 @app.route('/api/v3/yardstick/tasks/<string:main_cmd>', methods=['post'])
 @swag_from(os.path.abspath('.') + '/external/tasks.yaml')
 def tasks(main_cmd):
-    cmd = request.json.get('cmd', '')
-    opts = request.json.get('opts', {})
-    args = request.json.get('args', '')
+    cmd = utils.translate_to_str(request.json.get('cmd', ''))
+    opts = utils.translate_to_str(request.json.get('opts', {}))
+    args = utils.translate_to_str(request.json.get('args', ''))
 
     command_list = ['task', 'runner', 'scenario', 'testcase', 'plugin']
     if main_cmd in command_list:
